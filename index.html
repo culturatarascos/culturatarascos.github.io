@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Tarascos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Variables CSS para una fácil personalización de colores */
+        :root {
+            --color-primario: #005662; /* Azul verdoso oscuro, profundo */
+            --color-secundario: #a7d976; /* Verde claro vibrante, fresco */
+            --color-acento: #ffc107; /* Amarillo dorado, cálido */
+            --color-texto: #333;
+            --color-fondo: #f0f4f8; /* Gris azulado muy claro */
+            --color-claro: #ffffff;
+            --sombra-box: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Estilos generales del cuerpo de la página */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            line-height: 1.7; /* Mayor interlineado para mejor legibilidad */
+            overflow-x: hidden; /* Evita el scroll horizontal en móviles */
+        }
+
+        /* Contenedor principal para centrar el contenido */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Estilos del encabezado principal de la página */
+        header {
+            background-color: var(--color-primario);
+            color: var(--color-claro);
+            padding: 70px 20px;
+            text-align: center;
+            box-shadow: var(--sombra-box);
+            border-bottom: 5px solid var(--color-secundario);
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 1.5px;
+            color: var(--color-acento); /* Título en color acento */
+        }
+
+        header p {
+            font-size: 1.4em;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Estilos para cada sección de contenido individual */
+        section {
+            background-color: var(--color-claro);
+            margin: 35px auto;
+            padding: 45px;
+            border-radius: 10px;
+            box-shadow: var(--sombra-box);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex; /* Para organizar texto e imagen */
+            flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+            align-items: flex-start; /* Alinea elementos al inicio del eje cruzado */
+            gap: 30px; /* Espacio entre el texto y la imagen */
+            border-left: 6px solid var(--color-secundario); /* Borde decorativo */
+        }
+
+        /* Efecto al pasar el mouse sobre una sección */
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+        }
+
+        /* Estilos para los títulos de las secciones */
+        section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-primario);
+            font-size: 2.8em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--color-acento);
+            padding-bottom: 12px;
+            text-align: left; /* Títulos alineados a la izquierda */
+            width: 100%; /* El título ocupa todo el ancho */
+            font-weight: 700;
+        }
+
+        /* Contenedor de texto dentro de la sección. Ocupa más espacio */
+        .text-content {
+            flex: 2; /* Ocupa el doble de espacio que la imagen */
+            min-width: 320px; /* Ancho mínimo para el texto antes de envolver */
+        }
+
+        /* Contenedor de imagen dentro de la sección. Ocupa menos espacio */
+        .image-container {
+            flex: 1; /* Ocupa una parte del espacio */
+            min-width: 250px; /* Ancho mínimo para la imagen antes de envolver */
+            text-align: center; /* Centra la imagen si hay espacio extra */
+            background-color: var(--color-fondo); /* Fondo ligero para la imagen */
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .image-container img {
+            max-width: 100%; /* La imagen no excede el ancho de su contenedor */
+            height: 250px; /* Altura fija para las imágenes de sección */
+            object-fit: cover; /* Recorta la imagen para cubrir el área sin distorsionar */
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.03); /* Sutil zoom al pasar el mouse */
+        }
+
+        /* Estilos para los párrafos de texto */
+        p {
+            margin-bottom: 1.1em;
+            text-align: justify;
+            font-size: 1.05em;
+            color: #444;
+        }
+
+        /* Contenedor del video embebido (aspect ratio 16:9) */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 10px;
+            box-shadow: var(--sombra-box);
+            margin-top: 40px;
+            border: 4px solid var(--color-acento);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Estilos para los enlaces adicionales */
+        .enlaces-adicionales {
+            text-align: center;
+            margin: 40px 0;
+            padding: 20px;
+            background-color: var(--color-claro);
+            border-radius: 10px;
+            box-shadow: var(--sombra-box);
+        }
+
+        .enlaces-adicionales h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-primario);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .enlaces-adicionales a {
+            display: inline-block;
+            background-color: var(--color-secundario);
+            color: var(--color-primario);
+            padding: 12px 25px;
+            margin: 10px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .enlaces-adicionales a:hover {
+            background-color: var(--color-acento);
+            color: var(--color-claro);
+            transform: translateY(-3px);
+        }
+
+        /* Estilos del pie de página */
+        footer {
+            background-color: var(--color-primario);
+            color: var(--color-claro);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--color-secundario);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.95em;
+            opacity: 0.85;
+        }
+
+        /* Responsive Design: Media Queries para adaptar a diferentes tamaños de pantalla */
+        @media (max-width: 992px) {
+            header h1 {
+                font-size: 3em;
+            }
+            header p {
+                font-size: 1.2em;
+            }
+            section {
+                padding: 35px;
+                flex-direction: column; /* Apila texto e imagen en pantallas medianas */
+                text-align: center; /* Centra el contenido en secciones apiladas */
+            }
+            section h2 {
+                font-size: 2.2em;
+                text-align: center; /* Centra el título de la sección */
+            }
+            .text-content {
+                order: 2; /* Texto debajo de la imagen en móviles */
+                min-width: unset; /* Elimina el min-width para flexibilidad */
+            }
+            .image-container {
+                order: 1; /* Imagen arriba del texto en móviles */
+                margin-bottom: 20px;
+                min-width: unset; /* Elimina el min-width */
+            }
+            .image-container img {
+                height: 200px; /* Ajusta la altura para pantallas más pequeñas */
+            }
+            .enlaces-adicionales a {
+                display: block; /* Cada enlace en su propia línea en móviles */
+                margin: 10px auto;
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 50px 15px;
+            }
+            header h1 {
+                font-size: 2.5em;
+            }
+            header p {
+                font-size: 1em;
+            }
+            section {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            section h2 {
+                font-size: 1.8em;
+            }
+            p {
+                font-size: 0.95em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 30px 10px;
+            }
+            header h1 {
+                font-size: 2em;
+            }
+            header p {
+                font-size: 0.85em;
+            }
+            .container {
+                padding: 10px;
+            }
+            section {
+                padding: 15px;
+            }
+            section h2 {
+                font-size: 1.5em;
+            }
+            .image-container img {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Explorando el Mundo de los Tarascos</h1>
+            <p>Un espacio dedicado a la vasta y fascinante cultura de los Tarascos, un pueblo indígena con una historia milenaria y tradiciones vibrantes en el corazón de Michoacán.</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section id="introduccion-general">
+            <h2>Bienvenida al Corazón de Michoacán</h2>
+            <div class="text-content">
+                <p><strong>Los tarascos o purépechas fueron una de las civilizaciones más importantes del México prehispánico, destacando por su compleja organización política, su avanzada metalurgia —particularmente en cobre, oro y plata— y su resistencia frente a la expansión del Imperio mexica. A diferencia de otros pueblos, nunca fueron conquistados por los aztecas, lo que refleja su fuerza militar y estratégica. Su capital, Tzintzuntzan, fue un centro político y ceremonial clave en el occidente de Mesoamérica. La herencia cultural purépecha sigue viva hasta hoy, especialmente en Michoacán, donde su lengua, tradiciones y artesanías continúan siendo fundamentales para la identidad de la región.</p>
+              
+            </div>
+            <div class="image-container">
+                <img src=tarasco1.png>
+            </div>
+        </section>
+
+        <section id="historia">
+            <h2>1. CHAC MOOL DE PÁTZCUARO</h2>
+            <div class="text-content">
+                <p><strong>Este tipo de esculturas eran mobiliarios sagrados ubicados en la entrada de los templos principales o sobre algunos altares. Representan a personajes masculinos interpretados como mensajeros e intermediarios entre los dioses y los hombres.
+Recostado sobre su espalda junta sus manos a la altura del abdomen para formar una superficie plana donde se colocaban ofrendas asociadas con diversas ceremonias.
+Estas esculturas fueron características del Posclásico y aparecen en otros asentamientos como Tula, Chichén Itzá y Tenochtitlan.
+Andesita
+Procedencia: Pátzcuaro, Michoacán
+Cronología: Posclásico Tardío (1450-1521)</p>
+            </div>
+            <div class="image-container">
+                <img src=chacc.png>
+            </div>
+        </section>
+
+        <section id="imperio">
+            <h2>2. CONQUISTA</h2>
+            <div class="text-content">
+                <p><strong>La conquista del Occidente fue diferente a la de otras partes de México; debido a la diversidad étnica y lingüistica resultó difícil y sangrienta, fue necesario ir derrotando pueblo por pueblo para lograr el dominio de tan vasto territorio.
+Los tarascos, al igual que los mexicas, en casi 300 años lograron consolidar un gran imperio e impusieron su lengua y sus costumbres a varios pueblos. Sin embargo la conquista española terminó con su poderío; el último Cazonci o gobernante fue Tangaxoan Il, sacrificado por el conquistador español Beltrán Nuño de Guzmán en 1530, de modo que el sometimiento de este Señorío se llevó a cabo sin librar practicamente ninguna batalla.
+Tocó a los frailes franciscanos y agustinos evangelizar el área, quienes reconociendo la maestría de los indígenas en cada oficio, les asignaron las temáticas cristianas de acuerdo con su especialidad artesanal y con los recursos naturales disponibles. Así, subsiste hasta hoy en día la singularidad creativa de cada lugar, remanentes de la antigua organización social y religiosa de estos pueblos.</p>
+            </div>
+            <div class="image-container">
+                <img src=conquista.png>
+            </div>
+        </section>
+
+        <section id="conquista">
+            <h2>3. ESPECIALIZACIONES DE LOS PUEBLOS DEL OCCIDENTE</h2>
+            <div class="text-content">
+                <p><strong>Los pueblos del Occidente destacaron por sus obras de arte propias y originales; su imaginación no tuvo límites, plasmaron en varias materias primas el mundo que los rodeaba. Los ceramistas manufacturaron vasijas con decoraciones complicadas como el cloisonné o pseudo-cloisonné que debido a su abundancia en el occidente, se cree que se originó en esta región;
+los objetos de concha que representaron un simbolo de fertilidad y poder se trabajaron con técnicas muy elaboradas, resultando objetos utilitarios y de adorno usados tanto en la vida como en la muerte.</p>
+            </div>
+            <div class="image-container">
+                <img src=pueblos.png>
+            </div>
+        </section>
+
+        <section id="tradiciones">
+            <h2>4. TARASCOS</h2>
+            <div class="text-content">
+                <p><strong>Durante el Posclásico tardío, que va de 1250 a 1521 de nuestra era, los tarascos fueron el grupo preponderante en el panorama cultural del Occidente,
+Este grupo llego al lago de Patzcuaro y se mezcló con los pobladores ya existentes; en poco tiempo conquistaron el territorio de Michoacán y zonas aledañas, sus fronteras abarcaban desde el Lerma hasta el Balsas, ambos ríos caudalosos que desembocan en el Pacífico.
+De acuerdo con la Relación de Michoacán, documento del siglo XVI, en el año de 1370 se llevó a cabo la consolidación del Señorío tarasco por un personaje llamado Tariacuri, héroe cultural que logró unificar las aldeas alrededor del lago y edifico el Estado.
+Tariácuri reunió tres señoríos: Ihuatzio, Pátzcuaro y Tzintzuntzan, muy pronto sobresalió el poder político, económico y religioso de esta última ciudad, que fue la capital hasta el arribo de los conquistadores españoles.
+Los tarascos se distinguieron por ser un pueblo guerrero, mantuvieron una línea de fortificaciones separando sus dominios, situados generalmente en las colinas y márgenes de los rios como puestos de vigias.
+Fue el único pueblo que se opuso a la gran expansión de los mexicas, durante el siglo XV hubo varios intentos por parte de éstos para conquistarlos, de los cuales salieron derrotados, eso afirmo aún más el respeto de otras comunidades por este Señorio.</p>
+               
+            </div>
+            <div class="image-container">
+                <img src=tar.png>
+            </div>
+        </section>
+
+        <section id="musica-danzas">
+            <h2>5. RELACION CON LA FILOSOFIA </h2>
+            <div class="text-content">
+                <p><strong>La filosofía de los tarascos o purépechas se basaba en una profunda conexión con la naturaleza, los dioses y la comunidad. Creían que el universo estaba dividido en tres niveles: el cielo, la tierra y el inframundo, y que todo estaba interrelacionado. Su pensamiento era espiritual, considerando que la vida y la muerte eran parte de un ciclo natural, donde la muerte no era un final sino una transformación. Además, vivían según principios éticos que promovían el respeto, el equilibrio y el bien común. Aunque no escribieron filosofía como los griegos, su cosmovisión respondía a preguntas fundamentales de la existencia, por lo que puede considerarse una forma de pensamiento filosófico indígena..</p>
+            </div>
+            <div class="image-container">
+                <img src=ceraa.png>
+            </div>
+        </section>
+
+        <section id="idioma">
+            <h2>6. MÁSCARA DE XIPE</h2>
+            <div class="text-content">
+                <p><strong>Máscara realizada en cobre que representa al dios Xipe Totec, deidad originaria de la costa del Pacífico, relacionada con el arte de la metalurgia; sus atributos son los de la juventud, la renovación de las plantas que se visten con retoños verdes durante la primavera y, en especial, la fecundidad. Tiene dos orificios en la parte posterior, tal vez para amarrarse con corde les al fardo funerario.
+Cronología: Posclásico tardio 1200- 1521 d. C.</p>
+            </div>
+            <div class="image-container">
+                <img src=xipe.png>
+            </div>
+        </section>
+
+        <section id="gastronomia">
+            <h2>7. TECNOLOGÍA</h2>
+            <div class="text-content">
+                <p><strong>Los tarascos fueron excelentes artesanos, destacaron los lapidarios, cesteros, orfebres, plumajeros, tejedores, ceramistas y los que trabajaron la concha entre otros. Se particularizó cada oficio, que se heredaba de padres a hijos; al frente de cada grupo había un " mayordomo mayor " encargado de vigilar la producción y de recoger el tributo para el Cazonci o gobernante. En obsidiana destacan los objetos asociados al rito funerario y ceremonial, como las tallas de los cuchillos de formas fantásticas con estilizaciones de figuras humanas y de serpientes llamados " excéntricos" por sus formas caprichosas, cuchillos de sacrificio, espejos circulares muy pulidos en una cara y desbastados en la otra y hachas de hoja simple o efigie. Hay que hacer notar que este pueblo fue el primero que usó el metal en gran cantidad para fabricar instrumentos de uso práctico, tales como: azadas, coas, hachas, agujas, anzuelos y punzones, con lo que elevó notablemente su nivel económico y tecnológico.
+Cronología: Posclásico tardío 1200 - 1521 d. C.</p>
+            </div>
+            <div class="image-container">
+                <img src=tecno.png>
+            </div>
+        </section>
+
+        <section id="vestimenta">
+            <h2>8. RELIGIÓN</h2>
+            <div class="text-content">
+                <p><strong>La religión tarasca fue similar a la de otros pueblos mesoamericanos, con deidades como Xipe " nuestro señor el desollado " y Tláloc asociado con el agua; pero son raras las representaciones de éstos en escultura, pintura o cerámica. Sabemos por las fuentes históricas que tenían como ser supremo a Curiacaveri, " la gran alumbrada"
+, creador del universo, al que
+rendían culto en los templos manteniendo de día y de noche fuegos ceremoniales. La contraparte femenina era Curiavaperi, madre de todos los dioses terrestres, patrona de la vida y de la muerte.
+Las ceremonias y ritos giraban alrededor del sol o " La gran alumbrada "
+Una de las principales tareas era recolectar leña y mantener el fuego en los braseros donde se quemaba copal y tabaco, el humo que subía al cielo formaba las nubes que comunicaban y alimentaban de manera simbólica a los dioses del cielo, al llover, ese alimento divino caía de nuevo a la tierra para producir mantenimientos para el hombre.
+Posclásico tardío 1200 - 1521 d. C</p>
+            </div>
+            <div class="image-container">
+                <img src=reli.png>
+            </div>
+        </section>
+
+        <section id="artesania">
+            <h2>9. ORNAMENTOS</h2>
+            <div class="text-content">
+                <p><strong>Por la Relación de Michoacán ( documento del siglo XVI ), sabemos que los jefes políticos tarascos compartían en muchos casos el oficio de los sacerdotes. Éstos y los nobles constituían la clase alta y, como símbolo de su rango, usaban bezotes y pinzas colgadas sobre el pecho, así como adornos de materiales preciosos. Además, los sacerdotes llevaban sobre su espalda, como símbolo de investidura, un calabazo pintado. Se han encontrado navajas y puntas de proyectil de obsidiana, hachas de cobre con restos de textil, sin huellas de uso, excavadas en entierros de personajes de alto rango social.
+Cronología: Posclásico tardio 1200-1521 d. C.</p>
+            </div>
+            <div class="image-container">
+                <img src=ora.png>
+            </div>
+        </section>
+
+        <section id="cosmovision">
+            <h2>10. TRONO ZOOMORFO</h2>
+            <div class="text-content">
+                <p><strong>La escultura de bulto en piedra fue un complemento de la arquitectura, con tendencia al modelado y con poco énfasis en el detalle y realismo, no es monumental sino de tamaño moderado, esbozando los rasgos con rigidez pero con gran significado. Es una muestra interesante esta representación de coyote, pudo haber servido como asiento o trono para algún cacique o shamán, ya que el hecho de estar sentado determina poder y rango social en las sociedades prehispánicas. Estos tronos están casi siempre relacionados con animales sagrados y simbólicos como el jaguar o el coyote. El coyote debió haber sido el animal sagrado para los habitantes de Ihuatzio ya que, en tarasco, esta palabra significa coyote.
+Procedencia: /huatzio, Michoacán
+Cronología: Posclásico tardío 1200 - 1521 d. C</p>
+            </div>
+            <div class="image-container">
+                <img src=trono.png>
+            </div>
+        </section>
+
+        <section id="organizacion-social">
+            <h2>11. CONTACTOS CON OTRAS REGIONES</h2>
+            <div class="text-content">
+                <p><strong>Entre los tarascos la materia prima para la elaboración de objetos de metal fue el cobre, sin embargo tenemos muestras de ornamentos realizados en oro; dado que es un material sumamente maleable, pudo ser trabajado hasta lograr placas muy finas, que a menudo decoraron con la técnica del repujado; se usaron para confeccionar discos, alfileres, diademas y placas colgantes. Una de las características de la metalurgia tarasca es que se acerca más a los estilos y técnicas sudamericanas, en especial a las de Ecuador y Perú, que a las centroamericanas. A diferencia de otras regiones, cuenta con más piezas martilladas que fundidas, usaron aleaciones para rebajar el oro y objetos ornamentales laminados y repujados.
+Cronología: Posclásico tardío 1200 - 1521 d. C</p>
+            </div>
+            <div class="image-container">
+                <img src=regi.png>
+            </div>
+        </section>
+
+        <section id="educacion">
+            <h2>12. RELACION CON LA TRIGONOMETRIA</h2>
+            <div class="text-content">
+                <p><strong>La cultura tarasca no desarrolló la trigonometría como ciencia formal, tal como lo hicieron los griegos, pero sí usaron conocimientos relacionados con la observación de ángulos, distancias y posiciones, especialmente en sus construcciones y su observación del cielo.
+
+Por ejemplo, los tarascos construían sus templos y centros ceremoniales tomando en cuenta la posición del sol y otros astros. Esto requería un conocimiento práctico de la orientación y de cómo se movían los cuerpos celestes a lo largo del año, lo cual implica una forma elemental de pensamiento trigonométrico, aunque no usaran fórmulas o términos como seno o coseno.
+
+En resumen, la relación entre los tarascos y la trigonometría es indirecta: no conocían la trigonometría como tal, pero su forma de observar el cielo, medir el tiempo y orientar sus construcciones muestra un pensamiento matemático ligado a principios que más tarde formarían parte de esta rama de las matemáticas.</p>
+            </div>
+            <div class="image-container">
+                <img src=lugar.png>
+            </div>
+        </section>
+
+        <section id="medicina">
+            <h2>13. BEZOTE DE OBSIDIANA Y TURQUESA</h2>
+            <div class="text-content">
+                <p><strong>El bezote o adorno labial se colocaba en la parte inferior del labio, introduciendo las aletas laterales en un orificio de la barbi-lla, y dejando visible la parte central de forma circular, a veces con casquillos de oro e incrustaciones de turquesa o bien de él pendían plumas o borlas de algodón.
+Cronología: Posclásico tardío 1200 - 1521 d. C</p>
+            </div>
+            <div class="image-container">
+                <img src=bezo.png>
+            </div>
+        </section>
+
+        <section id="literatura-oralidad">
+            <h2>14. CERÁMICA</h2>
+            <div class="text-content">
+                <p><strong>Este pueblo elaboró piezas de gran calidad y belleza, así la alfareria tarasca se reconoce por su magnífico acabado y formas delicadas, tanto en las vajillas de un solo color como en las polícromas. Estas se emplearon para el uso doméstico, el ritual funerario, las ceremonias políticas y para el comercio y trueque con otros pueblos. Las vasijas adoptan diferentes formas, destacan las ollas globulares y cuadrangulares con protuberancias en el cuerpo, con asas vertedera, del tipo canasta o de estribo, cajetes con soportes sonaja, patojos con asas solidas, recipientes en forma de calabaza, jarras zoomorfas que representan aves y vasijas miniatura, copia fiel de las de mayor tamaño.
+Estas vasijas nos recuerdan las formas sudamericanas.
+Cronologia: Posclásico tardío 1200 - 1521 d. C.</p>
+            </div>
+            <div class="image-container">
+                <img src=cera.png>
+            </div>
+        </section>
+
+        <section id="arquitectura">
+            <h2>15. ECONOMÍA</h2>
+            <div class="text-content">
+                <p><strong>Con un medio ambiente fértil, la economía de los tarascos fue mixta, basandose principalmente en la agricultura, el cultivo de maíz, el frijol y la calabaza; practicaron la pesca, la cacería y la recolección de frutos y semillas; tenían una dieta variada que incluía pescado, tortuga, guajolote, pato, venado, conejo, jabalíes entre otras especies; las que representaron en varias materias primas como las que se muestran. La organización económica se caracterizó por la división del trabajo y la formación de especialistas en cada aspecto.
+Cronología: Posclásico tardío 1200 - 1521 d. C</p>
+            </div>
+            <div class="image-container">
+                <img src=eco.png>
+            </div>
+        </section>
+
+        <section id="resiliencia">
+            <h2>GRACIAS POR SER PARTE DE ESTA COMUNIDAD</h2>
+            <div class="text-content">
+                <p><strong>En esta página celebramos
+con orgullo las raíces, la historia y la grandeza del pueblo purépecha.
+Gracias por acompañarnos en este camino de difusión, respeto y amor por nuestra cultura.
+Cada comentario, cada visita y cada aporte ayuda a mantener viva una herencia que no se olvida.
+
+¡Juchari Uinapekua!.</p>
+               
+            </div>
+            <div class="image-container">
+                <img src=bros.png>
+            </div>
+        </section>
+
+        <section id="video-cultura">
+            <h2>Video Destacado: Un Vistazo a la Cultura Tarasca</h2>
+            <p>Mira este video para obtener una perspectiva visual y sonora sobre la cultura Tarasca.</p>
+          
+<video width="640" height="360" controls autoplay loop muted poster="portada.jpg">
+  <source src="tarara.mp4" type="video/mp4">
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <div class="enlaces-adicionales">
+            <h3>Consulta mas culturas
+¡Aquí!</h3>
+            <p>Aquí puedes ver mas culturas</p>
+            <a href="https://proyectototonacas.github.io/"_blank" rel="noopener noreferrer">Sala cultura Totonacas</a>
+            <a href="https://manusnigra.my.canva.site/los-mayas" target="_blank" rel="noopener noreferrer">Sala Mayas</a>
+            </div>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 [Grupo 2IM6, Equipo 9 ]. Todos los derechos reservados.</p>
+            <p>Hecho con respeto y admiración por el legado P'urhépecha.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
